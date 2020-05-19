@@ -15,7 +15,7 @@ try {
             }
             stage("publish") {
                 docker.withRegistry("", "dockerhub-korekontrolrobot") {
-                    sh "docker image ls"
+                    sh "docker push korekontrol/php:${env.GIT_BRANCH}"
                 }
             }
             stage("finish") {
