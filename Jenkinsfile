@@ -1,20 +1,16 @@
-pipeline {
-    stages {
-        stage("checkout") {
-            steps {
+try {
+    node {
+        ansiColor('xterm') {
+            stage("checkout") {
                 checkout scm
+                sh "env"
             }
-        }
-        stage("build") {
-            steps {
+            stage("build") {
                 sh "DOCKER_BUILDKIT=1 PHP_TAG=${BRANCH_NAME} make build"
             }
-        }
-        stage("publish") {
-            steps {
+            stage("publish") {
                 docker.withRegistry("", "dockerhub-korekontrolrobot") {
-                    sh "docker image ls"
-                }
+                sh "docker image ls"
             }
         }
     }
