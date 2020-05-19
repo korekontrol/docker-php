@@ -14,7 +14,7 @@ RUN groupadd --system --gid 1000 app \
 RUN apt-get -qy update \
   && apt-get -qy --no-install-recommends install \
        ca-certificates gnupg \
-       curl git readline-common vim unzip \
+       bzip2 curl git netbase readline-common vim unzip \
        php${PHP_VERSION} \
        php${PHP_VERSION}-cli \
        php${PHP_VERSION}-fpm \
@@ -29,7 +29,6 @@ RUN apt-get -qy update \
        php${PHP_VERSION}-ldap \
        php${PHP_VERSION}-mbstring \
        php${PHP_VERSION}-mysql \
-       php${PHP_VERSION}-odbc \
        php${PHP_VERSION}-opcache \
        php${PHP_VERSION}-pgsql \
        php${PHP_VERSION}-snmp \
@@ -58,7 +57,7 @@ CMD "php-fpm7.3"
 USER app
 WORKDIR /home/app
 
-# Install prestissimo for faster composer
+# Install prestissimo for improved composer performance
 RUN cd /home/app && composer require -o --no-scripts hirak/prestissimo
 
 # Application environment defaults
