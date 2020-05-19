@@ -3,12 +3,12 @@ try {
         ansiColor('xterm') {
             stage("checkout") {
                 checkout scm
-                sh "env"
+                env.GIT_BRANCH = getGitBranchName()
             }
             stage("build") {
                 withEnv([
                     "DOCKER_BUILDKIT=1",
-                    "PHP_TAG=" + getGitBranchName()
+                    "PHP_TAG=" + env.GIT_BRANCH
                 ]) {
                     sh "make build"
                 }
