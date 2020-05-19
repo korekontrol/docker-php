@@ -2,10 +2,7 @@ pipeline {
     stages {
         stage("checkout") {
             steps {
-                def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
-                checkout scm: [$class: 'GitSCM',
-                    userRemoteConfigs: [[url: scmUrl]],
-                    branches: [[name: env.BRANCH_NAME]]]
+                checkout scm
             }
         }
         stage("build") {
@@ -15,7 +12,9 @@ pipeline {
         }
         stage("publish") {
             steps {
-                sh "echo docker push"
+                docker.withRegistry("", "dockerhub-korekontrolrobot") {
+                    sh "docker image ls"
+                }
             }
         }
     }
@@ -38,7 +37,7 @@ def notifySuccessful() {
 
 def notifyError() {
     withCredentials([usernamePassword(credentialsId: 'slack_team_token', passwordVariable: 'slack_token', usernameVariable: 'slack_team')]) {
-        slackSend (channel: '#p1', color: getSlackColor(), message: "${env.JOB_NAME}: build and deploy #${env.BUILD_NUMBER} failed\n`Error: ${getBuildLog}`\n```" + getChangeString() + " ```", teamDomain: $slack_team, token: $slack_token))
+        slackSend (channel: '#p1', color: getSlackColor(), message: "${env.JOB_NAME}: build and deploy #${env.BUILD_NUMBER} failed\n`Error: ${getBuildLog}`\n```" + getChangeString() + " ```", teamDomain: $slack_team, token: $slack_token)
     }
 }
 
