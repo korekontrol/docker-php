@@ -32,7 +32,7 @@ def notifySuccessful() {
     withCredentials([usernamePassword(credentialsId: 'slack_team_token', passwordVariable: 'slack_token', usernameVariable: 'slack_team')]) {   
         slackSend (
             channel: '#ci',
-            color: 'good'
+            color: 'good',
             message: "${env.JOB_NAME}: build <${BUILD_URL}|#${env.BUILD_NUMBER}> suceeded.\n\nChangelog:\n```" + getGitChangelog() + "```",
             teamDomain: slack_team,
             token: slack_token
@@ -44,7 +44,7 @@ def notifyError(log) {
     withCredentials([usernamePassword(credentialsId: 'slack_team_token', passwordVariable: 'slack_token', usernameVariable: 'slack_team')]) {
         slackSend (
             channel: '#ci',
-            color: 'danger'
+            color: 'danger',
             message: "${env.JOB_NAME}: build <${BUILD_URL}|#${env.BUILD_NUMBER}> failed.\n\n*Error:*\n```${log} ```\nChangelog:\n```" + getGitChangelog() + "```",
             teamDomain: slack_team,
             token: slack_token
