@@ -9,7 +9,7 @@ try {
                 withEnv([
                     "DOCKER_BUILDKIT=1",
                     "PHP_TAG=" + getGitBranchName()
-                )] {
+                ]) {
                     sh "make build"
                 }
             }
