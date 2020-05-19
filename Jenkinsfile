@@ -32,8 +32,8 @@ def notifySuccessful() {
     withCredentials([usernamePassword(credentialsId: 'slack_team_token', passwordVariable: 'slack_token', usernameVariable: 'slack_team')]) {   
         slackSend (
             channel: '#ci',
-            color: getSlackColor(),
-            message: "${env.JOB_NAME}: build <${BUILD_URL}|#${env.BUILD_NUMBER}> *${currentBuild.currentResult}*\n\nChangelog:\n```" + getGitChangelog() + " ```",
+            color: 'good'
+            message: "${env.JOB_NAME}: build <${BUILD_URL}|#${env.BUILD_NUMBER}> suceeded.\n\nChangelog:\n```" + getGitChangelog() + "```",
             teamDomain: slack_team,
             token: slack_token
         )
@@ -44,18 +44,12 @@ def notifyError(log) {
     withCredentials([usernamePassword(credentialsId: 'slack_team_token', passwordVariable: 'slack_token', usernameVariable: 'slack_team')]) {
         slackSend (
             channel: '#ci',
-            color: getSlackColor(),
-            message: "${env.JOB_NAME}: build <${BUILD_URL}|#${env.BUILD_NUMBER}> *${currentBuild.currentResult}*\n\n*Error:*\n ```${log} ```\nChangelog:\n```" + getGitChangelog() + " ```",
+            color: 'danger'
+            message: "${env.JOB_NAME}: build <${BUILD_URL}|#${env.BUILD_NUMBER}> failed.\n\n*Error:*\n```${log} ```\nChangelog:\n```" + getGitChangelog() + "```",
             teamDomain: slack_team,
             token: slack_token
         )
     }
-}
-
-
-def getSlackColor() {
-  def SLACK_COLOR_MAP = ['SUCCESS': 'good', 'FAILURE': 'danger', 'UNSTABLE': 'danger', 'ABORTED': 'danger']
-  return SLACK_COLOR_MAP[currentBuild.currentResult]
 }
 
 @NonCPS
