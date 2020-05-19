@@ -6,7 +6,12 @@ try {
                 sh "env"
             }
             stage("build") {
-                sh "DOCKER_BUILDKIT=1 PHP_TAG=${BRANCH_NAME} make build"
+                withEnv([
+                    "DOCKER_BUILDKIT=1",
+                    "PHP_TAG=" + getGitBranchName()
+                )] {
+                    sh "make build"
+                }
             }
             stage("publish") {
                 docker.withRegistry("", "dockerhub-korekontrolrobot") {
@@ -28,7 +33,7 @@ def notifySuccessful() {
         slackSend (
             channel: '#p1',
             color: getSlackColor(),
-            message: "${env.JOB_NAME}: build #${env.BUILD_NUMBER} succeeded\n${BUILD_URL}\n```" + getChangeString() + " ```",
+            message: "${env.JOB_NAME}: build #${env.BUILD_NUMBER} succeeded\n${BUILD_URL}\n```" + getGitChangelog() + " ```",
             teamDomain: slack_team,
             token: slack_token
         )
@@ -40,7 +45,7 @@ def notifyError(log) {
         slackSend (
             channel: '#ci',
             color: getSlackColor(),
-            message: "${env.JOB_NAME}: build #${env.BUILD_NUMBER} failed\n${BUILD_URL}\n`Error: ${log}`\n```" + getChangeString() + " ```",
+            message: "${env.JOB_NAME}: build #${env.BUILD_NUMBER} failed\n${BUILD_URL}\n`Error: ${log}`\n```" + getGitChangelog() + " ```",
             teamDomain: slack_team,
             token: slack_token
         )
@@ -59,7 +64,12 @@ def getBuildLog() {
 }
 
 @NonCPS
-def getChangeString() {
+def getGitBranchName() {
+    return scm.branches.first().getExpandedName(env.getEnvironment())
+}
+
+@NonCPS
+def getGitChangelog() {
     MAX_MSG_LEN = 100
     def changeString = ""
     echo "Gathering SCM changes"
