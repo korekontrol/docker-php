@@ -23,8 +23,10 @@ try {
             notifyError()
         }
     }
+} catch (err) {
+    notifyError(err)
+    throw(err)
 }
-
 
 def notifySuccessful() {
     withCredentials([usernamePassword(credentialsId: 'slack_team_token', passwordVariable: 'slack_token', usernameVariable: 'slack_team')]) {
