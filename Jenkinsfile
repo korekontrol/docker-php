@@ -3,7 +3,7 @@ try {
         ansiColor('xterm') {
             stage("checkout") {
                 checkout scm
-                env.GIT_BRANCH = getGitBranchName()
+                env.GIT_BRANCH = "7.3-buster"
             }
             stage("build") {
                 withEnv([
