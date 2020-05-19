@@ -10,7 +10,8 @@ try {
             }
             stage("publish") {
                 docker.withRegistry("", "dockerhub-korekontrolrobot") {
-                sh "docker image ls"
+                    sh "docker image ls"
+                }
             }
         }
     }
