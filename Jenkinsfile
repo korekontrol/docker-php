@@ -65,7 +65,7 @@ def getBuildLog() {
 
 @NonCPS
 def getGitBranchName() {
-    return scm.branches.first().getExpandedName(env.getEnvironment())
+    return scm.branches.first()
 }
 
 @NonCPS
