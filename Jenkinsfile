@@ -29,8 +29,8 @@ def notifySuccessful() {
             channel: '#p1',
             color: getSlackColor(),
             message: "${env.JOB_NAME}: build #${env.BUILD_NUMBER} succeeded\n${BUILD_URL}\n```" + getChangeString() + " ```",
-            teamDomain: $slack_team,
-            token: $slack_token
+            teamDomain: slack_team,
+            token: slack_token
         )
     }
 }
@@ -41,8 +41,8 @@ def notifyError(log) {
             channel: '#ci',
             color: getSlackColor(),
             message: "${env.JOB_NAME}: build #${env.BUILD_NUMBER} failed\n${BUILD_URL}\n`Error: ${log}`\n```" + getChangeString() + " ```",
-            teamDomain: $slack_team,
-            token: $slack_token
+            teamDomain: slack_team,
+            token: slack_token
         )
     }
 }
