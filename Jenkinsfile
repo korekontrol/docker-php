@@ -13,14 +13,9 @@ try {
                     sh "docker image ls"
                 }
             }
-        }
-    }
-    post {
-        success {
-            notifySuccessful()
-        }
-        failure {
-            notifyError()
+            stage("finish") {
+                notifySuccessful()
+            }
         }
     }
 } catch (err) {
@@ -29,16 +24,29 @@ try {
 }
 
 def notifySuccessful() {
-    withCredentials([usernamePassword(credentialsId: 'slack_team_token', passwordVariable: 'slack_token', usernameVariable: 'slack_team')]) {
-        slackSend (channel: '#p1', color: getSlackColor(), message: "${env.JOB_NAME}: build and deploy #${env.BUILD_NUMBER} succeeded\n```" + getChangeString() + " ```", teamDomain: $slack_team, token: $slack_token)
+    withCredentials([usernamePassword(credentialsId: 'slack_team_token', passwordVariable: 'slack_token', usernameVariable: 'slack_team')]) {   
+        slackSend (
+            channel: '#p1',
+            color: getSlackColor(),
+            message: "${env.JOB_NAME}: build #${env.BUILD_NUMBER} succeeded\n${BUILD_URL}\n```" + getChangeString() + " ```",
+            teamDomain: $slack_team,
+            token: $slack_token
+        )
     }
 }
 
-def notifyError() {
+def notifyError(log) {
     withCredentials([usernamePassword(credentialsId: 'slack_team_token', passwordVariable: 'slack_token', usernameVariable: 'slack_team')]) {
-        slackSend (channel: '#p1', color: getSlackColor(), message: "${env.JOB_NAME}: build and deploy #${env.BUILD_NUMBER} failed\n`Error: ${getBuildLog}`\n```" + getChangeString() + " ```", teamDomain: $slack_team, token: $slack_token)
+        slackSend (
+            channel: '#ci',
+            color: getSlackColor(),
+            message: "${env.JOB_NAME}: build #${env.BUILD_NUMBER} failed\n${BUILD_URL}\n`Error: ${log}`\n```" + getChangeString() + " ```",
+            teamDomain: $slack_team,
+            token: $slack_token
+        )
     }
 }
+
 
 def getSlackColor() {
   def SLACK_COLOR_MAP = ['SUCCESS': 'good', 'FAILURE': 'danger', 'UNSTABLE': 'danger', 'ABORTED': 'danger']
