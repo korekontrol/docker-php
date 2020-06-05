@@ -7,4 +7,4 @@ build:
 
 .PHONY: shell
 shell:
-	docker run --rm -i -t $(PHP_IMAGE):$(PHP_TAG) bash
+	docker run --rm -i -u root -t $(PHP_IMAGE):$(PHP_TAG) bash
