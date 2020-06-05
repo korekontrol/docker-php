@@ -12,4 +12,5 @@ if [[ $PHP_OPCACHE_ENABLE != 1 ]]; then
   phpdismod opcache
 fi
 
+echo "Starting $@"
 exec "$@"
