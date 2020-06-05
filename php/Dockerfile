@@ -51,7 +51,7 @@ RUN ln -s /usr/sbin/php-fpm${PHP_VERSION} /usr/sbin/php-fpm
 # Container start
 COPY php/entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-CMD "php-fpm7.3"
+CMD "php-fpm"
 
 # Home directory for container service
 USER app
