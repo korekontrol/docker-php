@@ -7,7 +7,7 @@ We decided to publish and maintain those images, as we see many projects fail in
 Supported PHP major versions (corresponds to branches of this repository):
 
 | Branch |
-| ------------- |:-------------:| -----:|
+| ------------- |
 | `7.3-buster` |
 
 ## Configuration
