@@ -1,7 +1,7 @@
 # PHP base docker image
-...with examples and production-ready focus.
+...with integration examples, development support and production-ready focus.
 
-It includes PHP application container, ready for production use, based on Debian, as well as documentation about integration with other components.
+It includes PHP application container (ready for production use, with development tools available) - based on Debian, as well as documentation and examples for integration with other components.
 
 This `master` branch includes only documentation and examples. For docker container implementation, see branches (each docker release tag corresponds to seperate branch of this repository).
 
