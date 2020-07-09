@@ -11,6 +11,8 @@ You need following software installed to run this example:
  - docker-compose
  - make
 
+You *don't* need to install PHP, apache, WAMP, LAMP, etc. - it's all handled by `docker`.
+
 # Local development
 To start local containers with mounted volume, use the following commands:
 ```
