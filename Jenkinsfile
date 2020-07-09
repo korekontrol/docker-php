@@ -19,7 +19,7 @@ try {
                 }
             }
             stage("finish") {
-                //notifySuccessful()
+                // notifySuccessful()
             }
         }
     }
@@ -60,7 +60,7 @@ def getBuildLog() {
 @NonCPS
 def getGitBranchName() {
     return scm.branches.first()
-
+}
 
 @NonCPS
 def getGitChangelog() {
