@@ -1,0 +1,28 @@
+# This example shows how to start containers *without* using filesystem mount, so that
+# we use files built into containers - like on production deployments.
+
+version: "3.5"
+
+services:
+  dev:
+    image: ${DOCKER_REPO:-}hello-world:${DOCKER_APP_TAG:-latest}
+    build:
+      context: "."
+      dockerfile: php/Dockerfile
+    environment:
+      - PHP_OPCACHE_VALIDATE_TIMESTAMPS=0
+
+  nginx:
+    image: ${DOCKER_REPO:-}hello-world-nginx:${DOCKER_NGINX_TAG:-latest}
+    build:
+      context: "."
+      dockerfile: nginx/Dockerfile
+      args:
+        - DOCKER_APP_TAG=${DOCKER_APP_TAG:-latest}
+    links:
+      - dev
+    ports:
+      - 127.0.0.1:80:80
+    environment:
+      - SERVER_NAME=hello.local
+      - PHP_HOST=dev
