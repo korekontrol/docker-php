@@ -5,6 +5,12 @@ This example shows basic PHP web application:
  - all requests are redirected to `index.php` file
  - there are two containers: `hello-world` (which runs `php-fpm`) and `hello-world-nginx` (which runs NginX and includes static files)
 
+# Requirements
+You need following software installed to run this example:
+ - docker
+ - docker-compose
+ - make
+
 # Local development
 To start local containers with mounted volume, use the following commands:
 ```
@@ -13,6 +19,7 @@ make up
 ```
 
 Then open the website at: http://localhost/
+All changes to files are immediately available - just refresh the webiste.
 
 # Production containers
 If you execute `make build`, it builds two containers: one with PHP and another with NginX and static files.
