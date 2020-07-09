@@ -1,14 +1,10 @@
-PHP container, ready for production use, based on Debian images (slim).
+# docker-php
+PHP base docker image, with integration examples, development tools and production-ready focus.
 
-We decided to publish and maintain those images, as we see many projects fail into common pitfalls when building PHP images:
- - using official PHP images means slow build process (as PHP extensions are compiled) and lots of unnecessary packages, required by build process of PHP modules
- - using alpine-based images allows more-flexible dependency management and building smaller containers. However, alpine does not offer same libraries and it causes `php-intl` to behave differently - check [this issue](https://github.com/docker-library/php/issues/428) for more information
+Click here for [documentation](https://github.com/korekontrol/docker-php/blob/master/README.md)
 
-Supported PHP major versions (corresponds to branches of this repository):
+## Credits
+Created by [Marek Obuchowicz](https://github.com/marek-obuchowicz) from [KoreKontrol - DevOps consulting services](https://www.korekontrol.eu/)
 
-| Branch |
-| ------------- |
-| `7.3-buster` |
-| `7.4-bullseye` |
-
-For documentation, check `master` branch.
+## License
+[MIT](LICENSE)
