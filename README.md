@@ -5,7 +5,6 @@ It includes PHP application container (ready for production use, with developmen
 
 This `master` branch includes only documentation and examples. For docker container implementation, see branches (each docker release tag corresponds to seperate branch of this repository).
 
-
 # Versions, branches
 | Branch / Version | Docker image |
 | ------------- | --- |
@@ -24,6 +23,23 @@ Our goals:
  - Integrate with modern frameworks.
  - Support node.js frontend builds.
  - Include asset files in seperate NginX container, without volumes for sharing files.
+
+# Reference
+## Configuration
+
+Following environmental variables are available:
+| Variable | Default value | Comments |
+| ------------- |-------------| -----|
+| `PHP_MEMORY_LIMIT` | `256m` |
+| `PHP_OPCACHE_ENABLE` | `1` |
+| `PHP_OPCACHE_MEMORY_CONSUMPTION` | `64` | Value in megabytes
+| `PHP_OPCACHE_REVALIDATE_FREQ` | `2` | Ignored if timestamp validation is not enabled
+| `PHP_OPCACHE_VALIDATE_TIMESTAMPS` | `0` | Set it to `1` on development environment
+| `PHP_XDEBUG_ENABLE` | `0` | Enable xdebug module; setting it to `1` will disable opcache. Don't use on production.
+
+
+
+
 
 ## Credits
 Created by [Marek Obuchowicz](https://github.com/marek-obuchowicz) from [KoreKontrol](https://www.korekontrol.eu/)
