@@ -9,6 +9,7 @@ This `master` branch includes only documentation and examples. For docker contai
 | Branch / Version | Docker image |
 | ------------- | --- |
 | [7.3-buster](tree/7.3-buster) | `korekontrol/php:7.3-buster` |
+| [7.4-bullseye](tree/7.4-bullseye) | `korekontrol/php:7.4-bullseye` |
 
 Images are published daily to [docker hub repository](https://hub.docker.com/repository/docker/korekontrol/php)
 
@@ -36,8 +37,6 @@ Following environmental variables are available:
 | `PHP_OPCACHE_REVALIDATE_FREQ` | `2` | Ignored if timestamp validation is not enabled
 | `PHP_OPCACHE_VALIDATE_TIMESTAMPS` | `0` | Set it to `1` on development environment
 | `PHP_XDEBUG_ENABLE` | `0` | Enable xdebug module; setting it to `1` will disable opcache. Don't use on production.
-
-
 
 
 
