@@ -8,8 +8,8 @@ This `master` branch includes only documentation and examples. For docker contai
 # Versions, branches
 | Branch / Version | Docker image |
 | ------------- | --- |
-| [7.3-buster](tree/7.3-buster) | `korekontrol/php:7.3-buster` |
-| [7.4-bullseye](tree/7.4-bullseye) | `korekontrol/php:7.4-bullseye` |
+| [7.4-bullseye](https://github.com/korekontrol/docker-php/tree/7.4-bullseye) | `korekontrol/php:7.4-bullseye` |
+| [7.3-buster](https://github.com/korekontrol/docker-php/tree/7.3-buster) | `korekontrol/php:7.3-buster` |
 
 Images are published daily to [docker hub repository](https://hub.docker.com/repository/docker/korekontrol/php)
 
