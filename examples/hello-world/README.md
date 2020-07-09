@@ -24,8 +24,10 @@ make up
 
 Then open the website at: http://localhost/
 
-All changes to files are immediately available - just refresh the webiste.
-Xdebug is not enabled in this example. To do so, please check [xdebug](../xdebug) example
+All changes to files are quickly available on the website - just refresh it. Opcache timestamp validation
+is enabled and it's checked every 2 seconds.
+
+Xdebug is not enabled. Please check [xdebug](../xdebug) example for more information about this topic.
 
 
 # Production readiness
@@ -36,6 +38,6 @@ Those two containers are ready for automated CI tests and production run. They d
 
 There is a health-check endpoint, which can be used as readiness and liveness probe (for kubernetes) or as a target health check for loadbalancers: `/healthz`. It returns HTTP `200` response, with body: `OK`
 
-Opcache is active by default, and in production example we change its settings so that it offers quckest response times.
+Opcache configuration is by default active and set to never validate timestamps (as files never change in live containers).
 
 NginX container waits for PHP container to become available before it starts (and responds `OK` on health check endpoint). This helps with plaforms like Kubernetes, where we make sure that new release becomes available only after all containers are ready.

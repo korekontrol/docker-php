@@ -36,7 +36,7 @@ Following environmental variables are used by the PHP container:
 | ------------- |-------------| -----|
 | `PHP_MEMORY_LIMIT` | `256m` | Per-process memory limit |
 | `PHP_OPCACHE_ENABLE` | `1` | Enable/disable opcache extension
-| `PHP_OPCACHE_MEMORY_CONSUMPTION` | `64` | Value in megabytes
+| `PHP_OPCACHE_MEMORY_CONSUMPTION` | `64` | Per-container opcache memory size (in MB)
 | `PHP_OPCACHE_REVALIDATE_FREQ` | `2` | Ignored if timestamp validation is not enabled
 | `PHP_OPCACHE_VALIDATE_TIMESTAMPS` | `0` | Set it to `1` on development environment
 | `PHP_XDEBUG_ENABLE` | `0` | Enable/disable xdebug module; setting it to `1` will disable opcache. Don't use on production.
