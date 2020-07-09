@@ -25,8 +25,8 @@ make up
 Then open the website at: http://localhost/
 
 All changes to files are immediately available - just refresh the webiste.
+Xdebug is not enabled in this example. To do so, please check [xdebug](../xdebug) example
 
-Xdebug: `tbd.`
 
 # Production readiness
 Please see `docker-compose.prod.yml` for the example.

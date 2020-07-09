@@ -11,6 +11,8 @@ services:
         - PHP_GID=${PHP_GID:-1000}
     volumes:
       - dev:/app
+    environment:
+      - PHP_OPCACHE_VALIDATE_TIMESTAMPS=1
 
   nginx:
     image: ${DOCKER_REPO:-}hello-world-nginx:${DOCKER_NGINX_TAG:-latest}

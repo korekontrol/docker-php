@@ -25,20 +25,21 @@ Our goals:
  - Support node.js frontend builds.
  - Include asset files in seperate NginX container, without volumes for sharing files.
 
+# Examples
+ - [hello-world](examples/hello-world) - really basic PHP web application, with composer and static assets
+
 # Reference
 ## Configuration
 
-Following environmental variables are available:
+Following environmental variables are used by the PHP container:
 | Variable | Default value | Comments |
 | ------------- |-------------| -----|
-| `PHP_MEMORY_LIMIT` | `256m` |
-| `PHP_OPCACHE_ENABLE` | `1` |
+| `PHP_MEMORY_LIMIT` | `256m` | Per-process memory limit |
+| `PHP_OPCACHE_ENABLE` | `1` | Enable/disable opcache extension
 | `PHP_OPCACHE_MEMORY_CONSUMPTION` | `64` | Value in megabytes
 | `PHP_OPCACHE_REVALIDATE_FREQ` | `2` | Ignored if timestamp validation is not enabled
 | `PHP_OPCACHE_VALIDATE_TIMESTAMPS` | `0` | Set it to `1` on development environment
-| `PHP_XDEBUG_ENABLE` | `0` | Enable xdebug module; setting it to `1` will disable opcache. Don't use on production.
-
-
+| `PHP_XDEBUG_ENABLE` | `0` | Enable/disable xdebug module; setting it to `1` will disable opcache. Don't use on production.
 
 ## Credits
 Created by [Marek Obuchowicz](https://github.com/marek-obuchowicz) from [KoreKontrol](https://www.korekontrol.eu/)
