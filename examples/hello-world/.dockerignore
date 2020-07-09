@@ -1,0 +1,6 @@
+.env
+.git/
+docker-compose*yml
+Makefile
+README.md
+vendor/

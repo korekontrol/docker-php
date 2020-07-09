@@ -1,0 +1,38 @@
+version: "3.5"
+
+services:
+  dev:
+    image: ${DOCKER_REPO:-}hello-world:${DOCKER_APP_TAG:-latest}
+    build:
+      context: "."
+      dockerfile: php/Dockerfile
+      args:
+        - PHP_UID=${PHP_UID:-1000}
+        - PHP_GID=${PHP_GID:-1000}
+    volumes:
+      - dev:/app
+
+  nginx:
+    image: ${DOCKER_REPO:-}hello-world-nginx:${DOCKER_NGINX_TAG:-latest}
+    build:
+      context: "."
+      dockerfile: nginx/Dockerfile
+      args:
+        - DOCKER_APP_TAG=${DOCKER_APP_TAG:-latest}
+    links:
+      - dev
+    volumes:
+      - dev:/app:ro
+    ports:
+      - 127.0.0.1:80:80
+    environment:
+      - SERVER_NAME=hello.local
+      - PHP_HOST=dev
+
+volumes:
+  dev:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD
+      o: bind
