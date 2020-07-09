@@ -1,6 +1,6 @@
 # Debian stretch-based container with app user and its home directory - /app
 
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 ARG PHP_VERSION
 ENV DEBIAN_FRONTEND noninteractive

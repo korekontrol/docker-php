@@ -3,7 +3,7 @@ try {
         ansiColor('xterm') {
             stage("checkout") {
                 checkout scm
-                env.GIT_BRANCH = "7.3-buster"
+                env.GIT_BRANCH = "7.4-bullseye"
             }
             stage("build") {
                 withEnv([
@@ -19,7 +19,7 @@ try {
                 }
             }
             stage("finish") {
-                notifySuccessful()
+                // notifySuccessful()
             }
         }
     }
