@@ -4,6 +4,7 @@ try {
             stage("checkout") {
                 checkout scm
                 env.GIT_BRANCH = "7.3-buster"
+                env.VERSION_TAG = "7.3"
             }
             stage("build") {
                 withEnv([
@@ -16,6 +17,9 @@ try {
             stage("publish") {
                 docker.withRegistry("", "dockerhub-korekontrolrobot") {
                     sh "docker push korekontrol/php:${env.GIT_BRANCH}"
+                    sh "docker image tag korekontrol/php:${env.GIT_BRANCH} korekontrol/php:${env.VERSION_TAG}"
+                    sh "docker push korekontrol/php:${env.VERSION_TAG}"
+                    sh "docker image rm korekontrol/php:${env.GIT_BRANCH} korekontrol/php:${env.VERSION_TAG}"
                 }
             }
             stage("finish") {
