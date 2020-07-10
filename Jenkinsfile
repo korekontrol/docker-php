@@ -4,7 +4,7 @@ try {
             stage("checkout") {
                 checkout scm
                 env.GIT_BRANCH = "7.4-bullseye"
-                env.IMAGE_TAG = "7.4"
+                env.VERSION_TAG = "7.4"
             }
             stage("build") {
                 withEnv([
