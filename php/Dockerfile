@@ -57,9 +57,6 @@ CMD "php-fpm"
 USER app
 WORKDIR /home/app
 
-# Install prestissimo for improved composer performance
-RUN cd /home/app && composer require -o --no-scripts hirak/prestissimo
-
 # Application environment defaults
 WORKDIR /app
 EXPOSE 9000
